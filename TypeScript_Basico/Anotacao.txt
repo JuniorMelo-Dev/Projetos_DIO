@@ -1,0 +1,2 @@
+- TypeScript é uma linguagem de programção e um superset do JavaScript. podemos adicionar uma camada de tipagem ao JavaScript, que permite um feedback mais rápido do código e refatoralção mais simples.
+
