@@ -1,9 +1,4 @@
 // Criando DioBank
-
-
-// -  sacar da conta
-// - encerrar a conta
-
 interface IConta {
       nomeTitular: string
       saldo?: number
@@ -12,6 +7,7 @@ interface IConta {
 class Conta {
       private nomeTitular: string
       private saldo: number
+      private ativa: boolean = true
 
       constructor({
             nomeTitular,
@@ -21,26 +17,51 @@ class Conta {
             this.saldo = saldo
             console.log(`Bem vindo ao DIO Bank, ${this.nomeTitular}`)
       }
-      // - consultar saldo
+      // - função consultar saldo
       meuSaldo = (): number => this.saldo
 
-      // - depositar na conta
-      depositar = (valor: number) => {
+      // - função depositar na conta
+      depositar = (valor: number): void | boolean => {
+            if(!this.ativa){
+                  console.log(`[ERRO] Conta desativada......Impossível realizar depósito..`)
+                  return this.ativa
+            }
             this.saldo += valor
             console.log(`Você depositou R$${this.saldo},00`)
       }
+
+      // -  função sacar da conta
+      sacar = (valor: number): boolean => {
+            if(!this.ativa){
+                  console.log(`[ERRO] Conta desativada......    impossível realizar sacar..`)
+                  return this.ativa
+            }
+
+            if(valor <= this.saldo){
+                  this.saldo -= valor
+                  console.log(`Você sacou R$${this.saldo},00`)
+                  return this.ativa
+            }
+            console.log(`Saldo insuficiente. Você quer sacar ${valor}. Seu saldo atual é de ${this.saldo}`)
+            return this.ativa
+      }
+
+      // - encerrar a conta
+      cancelarConta = () => {
+            if(this.saldo === 0) {
+                  this.ativa = false
+                  console.log(`Conta Desativada com sucesso!!`)
+                  return this.ativa
+            }
+
+            console.log(`[ERRO] Ainda não pode desativar conta de ${this.nomeTitular}. Conta com pendências!!`)
+      }
 }
 
-// - criar uma conta
-const contaA: Conta = new Conta({nomeTitular: 'Junior Melo'})
+// - chamando a função criar uma conta
+const conta: Conta = new Conta({nomeTitular: 'Junior Melo'})
 // const contaB: Conta = new Conta({nomeTitular: 'Luana Melo', saldo: 10})
 
-// - consultar saldo
-console.log('Saldo atual R$',contaA.meuSaldo()) 
-
-contaA.depositar(100) // depositar (R$100,00)
-// - consultar saldo depois do depósito
-console.log('Depois de um novo depósito, meu saldo é de R$', contaA.meuSaldo())
-
-// console.log(contaB)
-
+// - chamando a função consultar saldo
+conta.cancelarConta()
+conta.depositar(10)
