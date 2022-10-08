@@ -5,7 +5,11 @@ class CreateUserController {
 
         const name = request.body.name
 
-        return response.json({message: `Teste de método POST criando usuário ${name}`})
+        if(name.length === 0){
+            return response.status(400).json({mensagem: 'Informe um nome de usuário'})
+        }
+
+        return response.status(201).json({mensagem: `Teste de método POST criando usuário ${name}`})
     }
 }
 
