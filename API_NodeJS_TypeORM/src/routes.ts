@@ -8,6 +8,6 @@ router.get('/', (request: Request, response: Response) => {
     return response.json({message: 'Criando método GET'})
 })
 
-router.get('/users', createUserController.handle)
+router.post('/users', createUserController.handle)
 
 export { router }
