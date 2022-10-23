@@ -1,3 +1,3 @@
 # Projetos_DIO
 
-repositório com implementções dos projetos praticados no Website Digital Innovation One
+Repositório com implementações dos projetos praticados no Website Digital Innovation One
